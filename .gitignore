@@ -1,0 +1,11 @@
+.sites-runtime/
+.env
+.env.*
+!.env.example
+.vercel/
+.DS_Store
+node_modules/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+*.local

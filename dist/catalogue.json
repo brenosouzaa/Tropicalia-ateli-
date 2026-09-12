@@ -1,0 +1,63 @@
+{
+  "capturedAt": "2026-09-12",
+  "products": [
+    {
+      "price": "R$ 250,00",
+      "priceCents": 25000,
+      "availability": "unavailable",
+      "title": "Bolsa Maternidade Personalizada",
+      "category": "personalizados",
+      "desc": "KIT COMPLETO COM\nMala personalizada com bordado\nKit 3 trocas personalizada com bordado \n(1, 2 e 3 troca da maternidade)\nPasta de documentos personalizada com bordado\nE uma necessaire personalizada com bordado\nKIT TOTAL R$ 250,00\n(Vendemos também cada peça separadamente, consulte valores no nosso direct)\n• Várias cores e materiais disponíveis\n• Para meninas e meninos\n• personalize com nome, letra ou desenho da sua preferência\n• SOB ENCOMENDA!",
+      "imgs": [
+        "assets/1JvrizCnhjCM6KYPR3Jn-0-0b3fc8f9.jpg",
+        "assets/1JvrizCnhjCM6KYPR3Jn-1-2fb8157c.jpg"
+      ],
+      "updatedAt": "2026-09-11T15:18:13.314Z",
+      "date": "2026-02-09T01:09:54.221Z",
+      "id": "1JvrizCnhjCM6KYPR3Jn"
+    },
+    {
+      "price": "R$99,99",
+      "title": "Bolsa Clássica ",
+      "date": "2026-02-09T00:58:14.435Z",
+      "imgs": [
+        "assets/CiF5RjFHZSO5aeY75idu-0-deb7f83e.jpg",
+        "assets/CiF5RjFHZSO5aeY75idu-1-a544163e.jpg"
+      ],
+      "desc": "Produto artesanal 🧵\nConsultar cores disponíveis.",
+      "id": "CiF5RjFHZSO5aeY75idu"
+    },
+    {
+      "date": "2026-02-09T00:56:11.843Z",
+      "price": "R$89,99",
+      "title": "Bolsa Cantil",
+      "desc": "Produto artesanal 🧵\nConsultar cores disponíveis.",
+      "imgs": [
+        "assets/EP9oEJ2BVtE1XtdCtg6U-0-9f5bddb0.jpg",
+        "assets/EP9oEJ2BVtE1XtdCtg6U-1-48ad23ae.jpg"
+      ],
+      "id": "EP9oEJ2BVtE1XtdCtg6U"
+    },
+    {
+      "desc": "Produto artesanal 🧵\nConsultar cores disponíveis.",
+      "imgs": [
+        "assets/LjEDBgmaDRHhnNYNCIdB-0-112efafa.jpg"
+      ],
+      "title": "Bolsa Praia de Silicone ",
+      "price": "R$79,99",
+      "date": "2026-02-09T01:00:02.834Z",
+      "id": "LjEDBgmaDRHhnNYNCIdB"
+    },
+    {
+      "price": "R$89,99",
+      "date": "2026-02-09T01:02:27.455Z",
+      "title": "Shoulder Bag",
+      "desc": "Produto artesanal 🧵\nConsultar cores disponíveis.",
+      "imgs": [
+        "assets/RTgsdlscESIn2sFPYR7j-0-84b76fa1.jpg",
+        "assets/RTgsdlscESIn2sFPYR7j-1-a7249676.jpg"
+      ],
+      "id": "RTgsdlscESIn2sFPYR7j"
+    }
+  ]
+}

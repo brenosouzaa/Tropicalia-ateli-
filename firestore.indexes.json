@@ -1,0 +1,8 @@
+{
+  "indexes": [],
+  "fieldOverrides": [
+    { "collectionGroup": "produtos", "fieldPath": "imgs", "indexes": [] },
+    { "collectionGroup": "produtos", "fieldPath": "img", "indexes": [] },
+    { "collectionGroup": "config", "fieldPath": "banner", "indexes": [] }
+  ]
+}

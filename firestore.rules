@@ -1,0 +1,68 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function admin() {
+      return request.auth != null
+        && request.auth.token.get('tropicaliaAdmin', false) == true
+        && request.auth.token.firebase.sign_in_provider == 'password'
+        && request.auth.token.auth_time <= request.time.toMillis() / 1000 + 60
+        && request.time.toMillis() / 1000 - request.auth.token.auth_time <= 28800;
+    }
+    function image(value) {
+      return value is string && value.size() <= 800000
+        && (value.matches('data:image/(jpeg|jpg|png|webp|gif);base64,[A-Za-z0-9+/=\\s]+')
+          || value.matches('https://[^\\s]+')
+          || value.matches('assets/[A-Za-z0-9_.-]+[.](jpg|jpeg|png|webp)'));
+    }
+    function photoAt(images, n) {
+      return images.size() <= n || image(images[n]);
+    }
+    function product(d) {
+      return d.keys().hasAll(['title', 'price', 'priceCents', 'desc', 'imgs', 'category', 'availability', 'date', 'updatedAt'])
+        && d.keys().hasOnly(['title', 'price', 'priceCents', 'desc', 'imgs', 'img', 'category', 'availability', 'date', 'updatedAt'])
+        && d.title is string && d.title.size() > 0 && d.title.size() <= 100
+        && d.desc is string && d.desc.size() <= 2500
+        && d.price is string && d.price.size() <= 32
+        && (d.priceCents == null || (d.priceCents is int && d.priceCents >= 0 && d.priceCents <= 999999900))
+        && d.category in ['bolsas', 'personalizados', 'acessorios', 'outros']
+        && d.availability in ['', 'ready', 'order', 'unavailable']
+        && d.imgs is list && d.imgs.size() >= 1 && d.imgs.size() <= 6
+        && photoAt(d.imgs, 0) && photoAt(d.imgs, 1) && photoAt(d.imgs, 2)
+        && photoAt(d.imgs, 3) && photoAt(d.imgs, 4) && photoAt(d.imgs, 5)
+        && (!('img' in d) || image(d.img))
+        && d.updatedAt == request.time;
+    }
+    function contacts(d) {
+      return d.get('whatsapp', '5511913028442') is string
+        && d.get('whatsapp', '5511913028442').matches('[1-9][0-9]{7,14}')
+        && d.get('instagram', 'tropicalia_atelie') is string
+        && d.get('instagram', 'tropicalia_atelie').matches('[A-Za-z0-9_][A-Za-z0-9_.]{0,29}');
+    }
+    function layout(d) {
+      return d.keys().hasOnly(['bannerTitle', 'bannerSubtitle', 'bannerTitleColor', 'bannerSubtitleColor', 'banner', 'coverVersion', 'whatsapp', 'instagram', 'updatedAt'])
+        && d.get('bannerTitle', '') is string && d.get('bannerTitle', '').size() <= 70
+        && d.get('bannerSubtitle', '') is string && d.get('bannerSubtitle', '').size() <= 180
+        && d.get('bannerTitleColor', '#ffffff').matches('#[A-Fa-f0-9]{6}')
+        && d.get('bannerSubtitleColor', '#ffffff').matches('#[A-Fa-f0-9]{6}')
+        && (!('banner' in d) || (image(d.banner) && d.banner.size() <= 700000))
+        && (!('coverVersion' in d) || d.coverVersion == 2)
+        && contacts(d) && d.updatedAt == request.time;
+    }
+    // Every record in this collection is a public catalogue item; drafts stay in memory.
+    match /produtos/{id} {
+      allow read: if true;
+      allow create: if admin() && product(request.resource.data) && request.resource.data.date == request.time;
+      allow update: if admin() && product(request.resource.data)
+        && request.resource.data.date == resource.data.date;
+      allow delete: if admin();
+    }
+    match /config/layout {
+      allow read: if true;
+      allow create, update: if admin() && layout(request.resource.data);
+      allow delete: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
